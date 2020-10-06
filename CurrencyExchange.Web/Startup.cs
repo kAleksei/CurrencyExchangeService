@@ -24,6 +24,8 @@ namespace CurrencyExchange.Web
         {
 
             services.AddControllers();
+            services.AddMvc(Configuration);
+            services.AddSwagger();
             services.AddDataAccess(Configuration);
             services.AddHangfire(Configuration);
             services.AddSpa(Configuration);
@@ -49,6 +51,7 @@ namespace CurrencyExchange.Web
             app.UseRouting();
             app.UseHangfire(Configuration);
             app.UseCustomEndpoints();
+            app.UseSwagger();
             app.UseSpa(env);
 
            
