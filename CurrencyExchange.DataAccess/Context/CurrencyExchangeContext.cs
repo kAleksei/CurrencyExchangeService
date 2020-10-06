@@ -9,5 +9,10 @@ namespace CurrencyExchange.DataAccess.Context
     {
         public CurrencyExchangeContext(DbContextOptions<CurrencyExchangeContext> options) : base(options)
         {}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CurrencyExchangeContext).Assembly);
+        }
     }
 }
