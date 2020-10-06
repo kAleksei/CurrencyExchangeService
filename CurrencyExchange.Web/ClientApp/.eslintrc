@@ -1,0 +1,32 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "extends": [
+        "prettier",
+        "prettier/react",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": [
+        "prettier",
+        "import",
+        "typescript"
+    ],
+    "settings": {
+        "import/parsers": {
+          "@typescript-eslint/parser": [
+            ".ts",
+            ".tsx"
+          ]
+        },
+        "import/resolver": {
+          "typescript": {
+            "alwaysTryTypes": true
+          }
+        }
+      }
+}
