@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CurrencyExchange.BusinessLogic\CurrencyExchange.BusinessLogic.csproj" />
     <ProjectReference Include="..\CurrencyExchange.DataAccess\CurrencyExchange.DataAccess.csproj" />
   </ItemGroup>
 

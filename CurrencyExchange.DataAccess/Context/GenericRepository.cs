@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using CurrencyExchange.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace CurrencyExchange.DataAccess.Context.Repositories
+namespace CurrencyExchange.DataAccess.Context
 {
     public class GenericRepository<TEntity, TIdentifier> : IGenericRepository<TEntity, TIdentifier> where TEntity: class, IEntity<TIdentifier>
     {
