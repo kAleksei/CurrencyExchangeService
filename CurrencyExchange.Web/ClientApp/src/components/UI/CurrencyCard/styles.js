@@ -2,6 +2,7 @@ const styles = () => ({
     currencyCard: {
         minHeight: 150,
         padding: "10px 30px",
+        margin: 15,
     },
     trendIconWrapper: {
         paddingLeft: 10,
@@ -29,6 +30,9 @@ const styles = () => ({
     },
     currencyToUsdTitle: {
         marginLeft: 5,              
+    },
+    currencyCode: {
+      textTransform: "uppercase",  
     }
   })
   

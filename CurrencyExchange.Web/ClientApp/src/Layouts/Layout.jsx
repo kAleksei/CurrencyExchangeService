@@ -9,16 +9,12 @@ class Layout extends React.PureComponent {
   render() {
     return (
         <Container className={this.props.classes.layoutStyle} maxWidth={false}>
-
-      {/* <React.Fragment className={this.props.classes.layoutStyle} color="primary"> */}
         <NavMenu />
             {this.props.children}
-      {/* </React.Fragment> */}
         </Container>
     )
   }
 }
-
 
 export default compose(
   withStyles(styles)

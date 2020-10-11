@@ -3,59 +3,60 @@ import { compose } from "recompose"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { Row, Col } from "react-flexbox-grid"
-import { withStyles, Paper, Tabs, Tab } from "@material-ui/core"
+import { withStyles,} from "@material-ui/core"
 import styles from "./styles"
-import CurrencyTrending from "../../Domains/enums/currencyTrending"
-import classNames from "classnames"
+// import CurrencyTrending from "../../Domains/enums/currencyTrending"
+// import classNames from "classnames"
 import CurrencyCardComponent from "../../components/UI/CurrencyCard/CurrencyCardComponent"
-// import Paper from '@material-ui/core/Paper';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
+import {fetchCities} from "../../actions/cityActions"
+import {fetchCurrencies} from "../../actions/currencyActions"
+
 
 class HomeContainer extends React.PureComponent {
-
-  cities = [
-    {id: 0, name: 'Lviv'},
-    {id: 1, name: 'Kyiv'},
-  ]
-
-  cards = [
-    {
-      id: "1",
-      name: "EUR",
-      rate: 26.55,
-      currencyTrending: CurrencyTrending.up,
-      lastUpdate: new Date().toDateString,
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCityId: null
     }
-  ]
+  }
 
+  componentDidMount(){
+    this.props.fetchCities().then(cities => this.setState({ selectedCityId: cities[0].id}))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.selectedCityId !== this.state.selectedCityId){
+      this.props.fetchCurrencies({cityId: this.state.selectedCityId});
+    }
+  }
+
+  setCurrentCity = (event, newValue) => {
+    this.setState({selectedCityId: newValue})
+  }
 
 
   render() {
-    const { classes } = this.props
+    const { classes, cities, currencies } = this.props
     return (
       <>
       <Row>
         <Col md={12} colors="primary">
         <Paper className={classes.citiesTabWrapper}>
           <Tabs
-            value={0}
+            value={this.state.selectedCityId}
             indicatorColor="primary"
             textColor="primary"
-            // onChange={handleChange}
+            onChange={this.setCurrentCity}
             aria-label="Cities"
-            // TabIndicatorProps={
-              // <div style={{ backgroundColor: "red"}}></div>
-              // }
           >
-            {this.cities.map(city =>(
-              <Tab label={city.name} className={classes.cityTab} />
+            {cities.map(city =>(
+              <Tab label={city.name} className={classes.cityTab} value={city.id} />
             ))}
 
           </Tabs>
         </Paper>
         <Row>
-          {this.cards.map((card) => (
+          {currencies.map((card) => (
             <CurrencyCardComponent card={card} />
           ))}
         </Row>
@@ -67,15 +68,18 @@ class HomeContainer extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  //   const { user } = state.auth;
-  //   const { canSendSatisfactionFeedback } = state.employeeFeedback;
-  //   return {
-  //     user,
-  //     canSendSatisfactionFeedback,
-  //   };
+    const { cities } = state.city;
+    const { currencies } = state.currency;
+    return {
+      cities,
+      currencies,
+    };
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchCurrencies,
+  fetchCities
+}, dispatch)
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),

@@ -31,7 +31,7 @@ class CurrencyCardComponent extends React.PureComponent {
       <Col md={3}>
         <Card className={classes.currencyCard}>
           <Row style={{ position: "relative" }}>
-            <Typography variant="h4">{card.name}</Typography>
+            <Typography variant="h4" className={classes.currencyCode}>{card.code}</Typography>
             <Typography variant="h6" className={classes.currencyToUsdTitle}>
               /USD
             </Typography>
@@ -65,7 +65,7 @@ class CurrencyCardComponent extends React.PureComponent {
               )}
             </React.Fragment>
           </Row>
-          <Typography variant="h6">Last update: {card.lastUpdate} 23/10/2020</Typography>
+          <Typography variant="h6">Last update: {card.lastUpdate}</Typography>
         </Card>
       </Col>
     )
@@ -73,6 +73,5 @@ class CurrencyCardComponent extends React.PureComponent {
 }
 
 export default compose(
-    // connect(mapStateToProps, mapDispatchToProps),
     withStyles(styles)
   )(CurrencyCardComponent)

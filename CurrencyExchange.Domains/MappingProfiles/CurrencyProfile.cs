@@ -8,10 +8,12 @@ namespace CurrencyExchange.Domains.MappingProfiles
         public CurrencyProfile()
         {
             CreateMap<Currency, CurrencyDTO>()
-                .ForMember(c => c.Code, opt => opt.MapFrom(c => c.CurrencyCode));
+                .ForMember(c => c.Code, opt => opt.MapFrom(c => c.CurrencyCode))
+                .ForMember(c => c.LastUpdate, opt => opt.MapFrom(c => c.ChangeTime));
 
             CreateMap<CurrencyDTO, Currency>()
-                .ForMember(c => c.CurrencyCode, opt => opt.MapFrom(c => c.Code));
+                .ForMember(c => c.CurrencyCode, opt => opt.MapFrom(c => c.Code))
+                .ForMember(c => c.ChangeTime, opt => opt.MapFrom(c => c.LastUpdate));
 
             CreateMap<Currency, CurrencyArchive>()
                 .ForMember(c => c.CurrencyId, opt => opt.MapFrom(c => c.Id));

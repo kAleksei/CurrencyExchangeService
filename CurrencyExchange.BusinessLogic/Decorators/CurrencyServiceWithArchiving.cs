@@ -28,12 +28,16 @@ namespace CurrencyExchange.BusinessLogic.Decorators
         public override async Task<CurrencyDTO> Create(CurrencyDTO currency)
         {
             if (currency == null) throw new ArgumentNullException(nameof(currency));
+            if (currency.CityId <= 0)
+            {
+                throw new ArgumentException("Currency city id cannot be less 0");
+            }
             var currencyCode = currency.Code.ToLower();
-            var entity = (await _unitOfWork.GetRepository<ICurrencyRepository>().Get(c => c.CurrencyCode == currencyCode)).FirstOrDefault();
+            var entity = (await _unitOfWork.GetRepository<ICurrencyRepository>().Get(c => c.CurrencyCode == currencyCode && c.CityId == currency.CityId)).FirstOrDefault();
             if (entity != null)
             {
                 var currencyDTO = _mapper.Map<CurrencyDTO>(entity);
-                if (entity.ChangeTime.Date < DateTime.Now.Date)
+                if (entity.ChangeTime.Date < DateTime.Now.Date && Math.Abs(entity.Rate - currency.Rate) > 0.001)
                 {
 
                     entity.Rate = currency.Rate;

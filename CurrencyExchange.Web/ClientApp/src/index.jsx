@@ -39,6 +39,7 @@ const defaultTheme = createMuiTheme({
       },
       h3: {
         fontFamily: "Segoe UI",
+        fontSize: "2rem",
       },
       h4: {
         fontFamily: "Segoe UI",
