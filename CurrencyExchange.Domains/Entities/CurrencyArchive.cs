@@ -3,7 +3,7 @@ using CurrencyExchange.DataAccess.Interfaces;
 
 namespace CurrencyExchange.Domains.Entities
 {
-    public class Currency : IEntity<int>, IEntityWithDate
+    public class CurrencyArchive : IEntity<int>, IEntityWithDate
     {
         public int Id { get; set; }
         public double Rate { get; set; }
@@ -15,5 +15,9 @@ namespace CurrencyExchange.Domains.Entities
 
         public DateTime CreateTime { get; set; }
         public DateTime ChangeTime { get; set; }
+
+        public int? CurrencyId { get; set; }
+        public Currency CurrencyReference { get; set; }
+        public DateTime DeleteTime { get; set; }
     }
 }

@@ -26,9 +26,12 @@ namespace CurrencyExchange.Web
             services.AddControllers();
             services.AddMvc(Configuration);
             services.AddSwagger();
+            services.AddMapper(Configuration);
+            services.AddBusinessLogicServices(Configuration);
             services.AddDataAccess(Configuration);
             services.AddHangfire(Configuration);
             services.AddSpa(Configuration);
+            services.AddSettings(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

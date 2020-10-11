@@ -1,4 +1,4 @@
-import currencyTrending from "../../enums/currencyTrending"
+import currencyTrending from "../../Domains/enums/currencyTrending"
 
 const CurrencyTrendingToClassName = Object.freeze({
     

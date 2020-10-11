@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CurrencyExchange.BusinessLogic.Interfaces;
+using CurrencyExchange.Domains.DataTransferObjects.Currency;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,22 +16,18 @@ namespace CurrencyExchange.Web.Controllers.api
     [AllowAnonymous]
     public class CurrencyController : ControllerBase
     {
-        public CurrencyController()
+        private readonly ICurrencyService _currencyService;
+
+        public CurrencyController(ICurrencyService currencyService)
         {
-            
+            _currencyService = currencyService;
         }
         
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]CurrencyFilterDTO filter)
         {
-            return new JsonResult("Hello");
+            var result = await _currencyService.Get(filter);
+            return new JsonResult(result);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post()
-        {
-            return new JsonResult("Hello");
-        }
-
     }
 }

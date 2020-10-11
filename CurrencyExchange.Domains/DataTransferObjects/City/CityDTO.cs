@@ -1,15 +1,13 @@
 ﻿using System;
-using CurrencyExchange.DataAccess.Interfaces;
 
-namespace CurrencyExchange.Domains.Entities
+namespace CurrencyExchange.Domains.DataTransferObjects.City
 {
-    public class City: IEntity<int>, IEntityWithDate
+    public class CityDTO
     {
         public int Id { get; set; }
-        public string CityName { get; set; }
+        public string Name { get; set; }
         public double Ratio { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime ChangeTime { get; set; }
-
     }
 }

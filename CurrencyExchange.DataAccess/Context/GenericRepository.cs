@@ -5,13 +5,14 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CurrencyExchange.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace CurrencyExchange.DataAccess.Context
 {
     public class GenericRepository<TEntity, TIdentifier> : IGenericRepository<TEntity, TIdentifier> where TEntity: class, IEntity<TIdentifier>
     {
-        private readonly CurrencyExchangeContext _currencyExchangeContext;
+        public readonly CurrencyExchangeContext _currencyExchangeContext;
         private readonly DbSet<TEntity> _dbSet;
 
         public GenericRepository(CurrencyExchangeContext currencyExchangeContext)
@@ -54,9 +55,10 @@ namespace CurrencyExchange.DataAccess.Context
             return await _dbSet.SingleOrDefaultAsync(entity => entity.Id.Equals(id));
         }
 
-        public virtual async Task Insert(TEntity entity)
+        public virtual async Task<TEntity> Insert(TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
+            var result = await _dbSet.AddAsync(entity);
+            return result.Entity;
         }
 
         public virtual async Task InsertRange(IEnumerable<TEntity> entities)
@@ -78,13 +80,14 @@ namespace CurrencyExchange.DataAccess.Context
             _dbSet.Remove(entityToDelete);
         }
 
-        public virtual void Update(TEntity entityToUpdate)
+        public virtual async Task<TEntity> Update(TEntity entityToUpdate)
         {
             if (_currencyExchangeContext.Entry(entityToUpdate).State == EntityState.Detached)
             {
                 _dbSet.Attach(entityToUpdate);
             }
             _currencyExchangeContext.Entry(entityToUpdate).State = EntityState.Modified;
+            return entityToUpdate;
         }
 
         public virtual void DeleteRange(IEnumerable<TEntity> entities)

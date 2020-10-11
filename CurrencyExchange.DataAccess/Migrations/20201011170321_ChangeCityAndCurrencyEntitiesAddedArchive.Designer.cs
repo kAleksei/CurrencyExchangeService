@@ -4,14 +4,16 @@ using CurrencyExchange.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CurrencyExchange.DataAccess.Migrations
 {
     [DbContext(typeof(CurrencyExchangeContext))]
-    partial class CurrencyExchangeContextModelSnapshot : ModelSnapshot
+    [Migration("20201011170321_ChangeCityAndCurrencyEntitiesAddedArchive")]
+    partial class ChangeCityAndCurrencyEntitiesAddedArchive
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,11 +34,11 @@ namespace CurrencyExchange.DataAccess.Migrations
                     b.Property<string>("CityName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("CityRatio")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<double>("Ratio")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

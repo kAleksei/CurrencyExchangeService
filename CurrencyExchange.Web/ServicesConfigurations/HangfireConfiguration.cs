@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CurrencyExchange.BusinessLogic.Interfaces;
 using CurrencyExchange.DataAccess.Context;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
@@ -25,7 +26,7 @@ namespace CurrencyExchange.Web.ServicesConfigurations
 
         private static void ConfigureHangfire()
         {
-
+            RecurringJob.AddOrUpdate<IForeignExchangeRatesAPIService>(s => s.UpdateAllCurrenciesByCities(), Cron.Daily(20));
         }
     }
 }

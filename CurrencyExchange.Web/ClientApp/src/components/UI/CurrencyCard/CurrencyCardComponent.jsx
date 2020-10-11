@@ -8,7 +8,7 @@ import styles from "./styles"
 import TrendingDownIcon from "@material-ui/icons/TrendingDown"
 import TrendingFlatIcon from "@material-ui/icons/TrendingFlat"
 import TrendingUpIcon from "@material-ui/icons/TrendingUp"
-import CurrencyTrending from "../../../enums/currencyTrending"
+import CurrencyTrending from "../../../Domains/enums/currencyTrending"
 import classNames from "classnames"
 
 class CurrencyCardComponent extends React.PureComponent {

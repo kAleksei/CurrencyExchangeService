@@ -43,6 +43,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CurrencyExchange.BusinessLogic\CurrencyExchange.BusinessLogic.csproj" />
     <ProjectReference Include="..\CurrencyExchange.DataAccess\CurrencyExchange.DataAccess.csproj" />
+    <ProjectReference Include="..\CurrencyExchange.Domains\CurrencyExchange.Domains.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

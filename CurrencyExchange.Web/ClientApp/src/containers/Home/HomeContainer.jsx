@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux"
 import { Row, Col } from "react-flexbox-grid"
 import { withStyles, Paper, Tabs, Tab } from "@material-ui/core"
 import styles from "./styles"
-import CurrencyTrending from "../../enums/currencyTrending"
+import CurrencyTrending from "../../Domains/enums/currencyTrending"
 import classNames from "classnames"
 import CurrencyCardComponent from "../../components/UI/CurrencyCard/CurrencyCardComponent"
 // import Paper from '@material-ui/core/Paper';
