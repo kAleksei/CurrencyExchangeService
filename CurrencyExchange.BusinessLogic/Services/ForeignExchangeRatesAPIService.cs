@@ -9,7 +9,6 @@ using CurrencyExchange.DataAccess.Interfaces;
 using CurrencyExchange.Domains.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Text.Json;
 using CurrencyExchange.Domains.DataTransferObjects.Currency;
 using CurrencyExchange.Domains.DataTransferObjects.ForeignExchangeRatesAPI;
 using Newtonsoft.Json;
