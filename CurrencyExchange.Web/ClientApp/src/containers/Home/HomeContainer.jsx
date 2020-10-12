@@ -48,6 +48,8 @@ class HomeContainer extends React.PureComponent {
             textColor="primary"
             onChange={this.setCurrentCity}
             aria-label="Cities"
+            variant="scrollable"
+            scrollButtons="on"
           >
             {cities.map(city =>(
               <Tab label={city.name} className={classes.cityTab} value={city.id} disableFocusRipple disableRipple />
