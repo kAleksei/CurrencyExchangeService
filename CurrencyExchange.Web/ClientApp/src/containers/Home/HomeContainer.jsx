@@ -21,12 +21,12 @@ class HomeContainer extends React.PureComponent {
   }
 
   componentDidMount(){
-    this.props.fetchCities().then(cities => this.setState({ selectedCityId: cities[0].id}))
+    this.props.fetchCities().then(cities => this.setState({ selectedCityId: cities[0].id, withHistory: true}))
   }
 
   componentDidUpdate(prevProps, prevState) {
     if(prevState.selectedCityId !== this.state.selectedCityId){
-      this.props.fetchCurrencies({cityId: this.state.selectedCityId});
+      this.props.fetchCurrencies({cityId: this.state.selectedCityId, withHistory: true});
     }
   }
 
@@ -50,7 +50,7 @@ class HomeContainer extends React.PureComponent {
             aria-label="Cities"
           >
             {cities.map(city =>(
-              <Tab label={city.name} className={classes.cityTab} value={city.id} />
+              <Tab label={city.name} className={classes.cityTab} value={city.id} disableFocusRipple disableRipple />
             ))}
 
           </Tabs>

@@ -20,8 +20,8 @@ const defaultTheme = createMuiTheme({
       main: "#E4EEFD",
     },
     secondary: {
-      main: "#819EF9"
-    }
+      main: "#819EF9",
+    },
   },
   overrides: {
     MuiCard: {
@@ -49,12 +49,28 @@ const defaultTheme = createMuiTheme({
         fontFamily: "Segoe UI",
         color: "#757575",
         fontSize: "small",
-      }
+      },
     },
     MuiTabs: {
       indicator: {
         backgroundColor: "#819EF9",
         height: 3,
+        color: "#212121",
+      },
+    },
+    MuiTab: {
+      root: {
+        "&$selected": {
+          color: "red",
+          boxShadow: "inset 5px 5px 13px #b2bcca, inset -5px -5px 13px #ffffff",
+          borderRadius: 5,
+
+        }
+      },
+      textColorPrimary:{
+        "&$selected": {
+          color: "#212121",
+        }
       }
     }
   },

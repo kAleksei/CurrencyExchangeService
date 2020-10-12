@@ -12,6 +12,7 @@ namespace CurrencyExchange.DataAccess.Interfaces
     public interface IGenericRepository<TEntity, TIdentifier> where TEntity: class, IEntity<TIdentifier>
     {
         Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, bool disableTracking = false);
+        IQueryable<TEntity> GetAsIQueryable();
         Task<TEntity> GetById(TIdentifier id);
         Task<TEntity> Insert(TEntity entity);
         Task InsertRange(IEnumerable<TEntity> entities);

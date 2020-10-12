@@ -9,6 +9,7 @@ using CurrencyExchange.DataAccess.Interfaces;
 using CurrencyExchange.DataAccess.Interfaces.Repositories;
 using CurrencyExchange.Domains.DataTransferObjects.Currency;
 using CurrencyExchange.Domains.Entities;
+using CurrencyExchange.Domains.Enums.Currency;
 
 namespace CurrencyExchange.BusinessLogic.Decorators
 {
@@ -25,6 +26,30 @@ namespace CurrencyExchange.BusinessLogic.Decorators
             _wrappedCurrencyService = wrappedCurrencyService;
         }
 
+        public override async Task<IEnumerable<CurrencyDTO>> Get(CurrencyFilterDTO filteringModel)
+        {
+            filteringModel.WithHistory = true;
+            var currencies = (await _wrappedCurrencyService.Get(filteringModel)).ToList();
+            if (filteringModel.WithHistory == false)
+            {
+                return currencies;
+            }
+
+            var previousCurrencies = new List<CurrencyArchive>();
+            foreach (var currency in currencies)
+            {
+                var currencyArchive =  await _unitOfWork.GetRepository<ICurrencyArchiveRepository>().GetPreviousCurrencyChange(currency.Id, currency.CityId);
+                if (currencyArchive != null)
+                {
+                    currency.CurrencyTrending = currency.Rate > currencyArchive.Rate ? CurrencyTrending.Down :
+                        currency.Rate < currencyArchive.Rate ? CurrencyTrending.Up : CurrencyTrending.NotChanged;
+                }
+                
+            }
+
+            return currencies;
+        }
+
         public override async Task<CurrencyDTO> Create(CurrencyDTO currency)
         {
             if (currency == null) throw new ArgumentNullException(nameof(currency));
@@ -33,7 +58,7 @@ namespace CurrencyExchange.BusinessLogic.Decorators
                 throw new ArgumentException("Currency city id cannot be less 0");
             }
             var currencyCode = currency.Code.ToLower();
-            var entity = (await _unitOfWork.GetRepository<ICurrencyRepository>().Get(c => c.CurrencyCode == currencyCode && c.CityId == currency.CityId)).FirstOrDefault();
+            var entity = (await _unitOfWork.GetRepository<ICurrencyRepository>().Get(c => c.CurrencyCode == currencyCode && c.CityId == currency.CityId, disableTracking: true)).FirstOrDefault();
             if (entity != null)
             {
                 var currencyDTO = _mapper.Map<CurrencyDTO>(entity);
@@ -42,7 +67,9 @@ namespace CurrencyExchange.BusinessLogic.Decorators
 
                     entity.Rate = currency.Rate;
                     entity.ChangeTime = DateTime.Now;
-                    await _unitOfWork.GetRepository<ICurrencyArchiveRepository>().Insert(_mapper.Map<CurrencyArchive>(entity));
+                    var entityArchive = _mapper.Map<CurrencyArchive>(entity);
+                    entityArchive.Id = 0;
+                    await _unitOfWork.GetRepository<ICurrencyArchiveRepository>().Insert(entityArchive);
                     await _wrappedCurrencyService.Update(currencyDTO);
                     return currencyDTO;
                 }

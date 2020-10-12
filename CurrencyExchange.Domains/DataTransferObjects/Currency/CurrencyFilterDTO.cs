@@ -11,5 +11,6 @@ namespace CurrencyExchange.Domains.DataTransferObjects.Currency
         public DateTime? CurrencyDate { get; set; }
         public int Count { get; set; }
         public int Skip { get; set; }
+        public bool WithHistory { get; set; }
     }
 }

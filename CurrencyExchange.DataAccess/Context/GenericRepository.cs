@@ -50,6 +50,11 @@ namespace CurrencyExchange.DataAccess.Context
             }
         }
 
+        public virtual IQueryable<TEntity> GetAsIQueryable()
+        {
+            return _dbSet.AsQueryable();
+        }
+
         public virtual async Task<TEntity> GetById(TIdentifier id)
         {
             return await _dbSet.SingleOrDefaultAsync(entity => entity.Id.Equals(id));
