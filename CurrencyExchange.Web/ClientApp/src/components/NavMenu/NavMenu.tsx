@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import classNames from "classnames"
 
 export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
     public state = {
@@ -11,7 +12,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
     public render() {
         return (
             <header>
-                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 menu-wrapper" light>
                     <Container>
                         <NavbarBrand tag={Link} to="/">Currency Exchange Service</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} className="mr-2"/>

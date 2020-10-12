@@ -1,4 +1,8 @@
-﻿a.navbar-brand {
+﻿.menu-wrapper{
+    border-radius: 5px;
+}
+
+a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -10,4 +14,4 @@ html { font-size: 14px; }
     html { font-size: 16px; }
 }
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.box-shadow { box-shadow: 5px 5px 13px #b2bcca, -5px -5px 13px #ffffff; }

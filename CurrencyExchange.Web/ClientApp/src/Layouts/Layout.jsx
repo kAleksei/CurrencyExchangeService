@@ -1,6 +1,5 @@
 import React from "react"
-// import { Container } from "reactstrap"
-import NavMenu from "../components/NavMenu"
+import NavMenu from "../components/NavMenu/NavMenu"
 import { withStyles, Container } from "@material-ui/core";
 import { compose } from "recompose"
 import styles from './styles';
