@@ -21,6 +21,8 @@ namespace CurrencyExchange.Web.Controllers.api
         public CurrencyController(ICurrencyService currencyService)
         {
             _currencyService = currencyService;
+
+
         }
         
         [HttpGet]
