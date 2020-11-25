@@ -9,7 +9,8 @@ const initialState = {
 const setCurrencies = (state, currencies) => {
     const newCurrencies = currencies.map(currency => updateObject(currency, {
         rate: currency.rate.toFixed(3),
-        lastUpdate: moment(currency.lastUpdate).format("DD/MM HH:mm")
+        lastUpdate: moment(currency.lastUpdate).format("DD/MM HH:mm"),
+        lastBalanceUpdate: moment(currency.lastBalanceUpdate).format("DD/MM HH:mm")
     }))
     return updateObject(state, {
         currencies: newCurrencies

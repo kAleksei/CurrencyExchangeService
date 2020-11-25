@@ -27,6 +27,9 @@ namespace CurrencyExchange.Web.ServicesConfigurations
         private static void ConfigureHangfire()
         {
             RecurringJob.AddOrUpdate<IForeignExchangeRatesAPIService>(s => s.UpdateAllCurrenciesByCities(), Cron.Daily(20));
+
+            RecurringJob.AddOrUpdate<IBalanceService>(s => s.DepositAllBalances(), Cron.Daily(10));
+            RecurringJob.AddOrUpdate<IBalanceService>(s => s.WithdrawAllBalances(), Cron.Hourly());
         }
     }
 }

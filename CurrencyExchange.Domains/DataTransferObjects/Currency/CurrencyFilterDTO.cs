@@ -12,5 +12,6 @@ namespace CurrencyExchange.Domains.DataTransferObjects.Currency
         public int Count { get; set; }
         public int Skip { get; set; }
         public bool WithHistory { get; set; }
+        public bool WithBalance { get; set; }
     }
 }

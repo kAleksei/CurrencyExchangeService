@@ -20,6 +20,7 @@ namespace CurrencyExchange.Web.ServicesConfigurations
                 provider.GetRequiredService<IMapper>(), provider.GetRequiredService<CurrencyService>()));
 
             services.AddTransient<IForeignExchangeRatesAPIService, ForeignExchangeRatesAPIService>();
+            services.AddTransient<IBalanceService, BalanceService>();
         }
     }
 }

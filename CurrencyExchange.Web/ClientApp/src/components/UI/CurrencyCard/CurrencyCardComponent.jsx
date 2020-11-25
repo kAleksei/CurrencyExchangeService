@@ -30,48 +30,60 @@ class CurrencyCardComponent extends React.PureComponent {
     return (
       <Col md={3}>
         <Card className={classes.currencyCard}>
-          <Row style={{ position: "relative" }}>
-            <Typography variant="h4" className={classes.currencyCode}>{card.code}</Typography>
-            <Typography variant="h6" className={classes.currencyToUsdTitle}>
-              /USD
-            </Typography>
-          </Row>
           <Row>
-            <Typography variant="h3" className={classes.rateText}>
-              {card.rate}
-            </Typography>
-            <React.Fragment className={classes.trendIconWrapper}>
-              {card.currencyTrending === CurrencyTrending.down ? (
-                <TrendingDownIcon
-                  className={classNames(
-                    classes.trendIcon,
-                    classes[this.getClassNameByCurrency(card.currencyTrending)]
+            <Col sm>
+              <Row style={{ position: "relative" }}>
+                <Typography variant="h4" className={classes.currencyCode}>
+                  {card.code}
+                </Typography>
+                <Typography variant="h6" className={classes.currencyToUsdTitle}>
+                  /USD
+                </Typography>
+              </Row>
+              <Row>
+                <Typography variant="h3" className={classes.rateText}>
+                  {card.rate}
+                </Typography>
+                <React.Fragment className={classes.trendIconWrapper}>
+                  {card.currencyTrending === CurrencyTrending.down ? (
+                    <TrendingDownIcon
+                      className={classNames(
+                        classes.trendIcon,
+                        classes[this.getClassNameByCurrency(card.currencyTrending)]
+                      )}
+                    />
+                  ) : card.currencyTrending === CurrencyTrending.up ? (
+                    <TrendingUpIcon
+                      className={classNames(
+                        classes.trendIcon,
+                        classes[this.getClassNameByCurrency(card.currencyTrending)]
+                      )}
+                    />
+                  ) : (
+                    <TrendingFlatIcon
+                      className={classNames(
+                        classes.trendIcon,
+                        classes[this.getClassNameByCurrency(card.currencyTrending)]
+                      )}
+                    />
                   )}
-                />
-              ) : card.currencyTrending === CurrencyTrending.up ? (
-                <TrendingUpIcon
-                  className={classNames(
-                    classes.trendIcon,
-                    classes[this.getClassNameByCurrency(card.currencyTrending)]
-                  )}
-                />
-              ) : (
-                <TrendingFlatIcon
-                  className={classNames(
-                    classes.trendIcon,
-                    classes[this.getClassNameByCurrency(card.currencyTrending)]
-                  )}
-                />
-              )}
-            </React.Fragment>
+                </React.Fragment>
+              </Row>
+              <Typography variant="h6">Last update: {card.lastUpdate}</Typography>
+            </Col>
+            <Col sm>
+              <Row>
+                <Typography variant="h6"> Current balance: {card.balance.toLocaleString()}</Typography>
+              </Row>
+              <Row>
+                <Typography variant="h6">Last balance update: {card.lastBalanceUpdate}</Typography>
+              </Row>
+            </Col>
           </Row>
-          <Typography variant="h6">Last update: {card.lastUpdate}</Typography>
         </Card>
       </Col>
     )
   }
 }
 
-export default compose(
-    withStyles(styles)
-  )(CurrencyCardComponent)
+export default compose(withStyles(styles))(CurrencyCardComponent)

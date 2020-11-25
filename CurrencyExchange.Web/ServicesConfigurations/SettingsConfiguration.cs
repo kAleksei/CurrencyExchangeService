@@ -12,7 +12,8 @@ namespace CurrencyExchange.Web.ServicesConfigurations
 
             services.Configure<ConnectionStringSettings>(configuration.GetSection("ConnectionStrings"));
             services.Configure<ForeignExchangeRatesAPISettings>(configuration.GetSection("ExchangeRatesAPI"));
-           
+            services.Configure<CurrencyBalanceSettings>(configuration.GetSection("CurrencyBalance"));
+
 
         }
     }

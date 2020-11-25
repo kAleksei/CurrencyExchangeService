@@ -7,7 +7,7 @@ namespace CurrencyExchange.BusinessLogic.Interfaces
 {
     public interface ICurrencyService
     {
-        Task<IEnumerable<CurrencyDTO>> Get(CurrencyFilterDTO filteringModel);
+        Task<IEnumerable<CurrencyDTO>> Get(CurrencyFilterDTO filteringModel = null);
         Task<CurrencyDTO> Create(CurrencyDTO currency);
         Task<CurrencyDTO> Update(CurrencyDTO currency);
         Task Delete(int id);

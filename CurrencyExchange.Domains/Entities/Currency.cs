@@ -12,7 +12,8 @@ namespace CurrencyExchange.Domains.Entities
         public string CurrencySymbol { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
-
+        public int BalanceId { get; set; }
+        public CurrencyBalance CurrencyBalance { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime ChangeTime { get; set; }
     }

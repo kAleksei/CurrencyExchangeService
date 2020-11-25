@@ -9,8 +9,9 @@ namespace CurrencyExchange.DataAccess.TablesConfiguration
         public void Configure(EntityTypeBuilder<Currency> builder)
         {
             builder.ToTable("Currencies");
-
             builder.HasOne(c => c.City);
+            builder.HasOne(c => c.CurrencyBalance).WithOne(b => b.Currency);
+
         }
     }
 }

@@ -33,7 +33,12 @@ namespace CurrencyExchange.DataAccess.Context.Repositories
         public async Task<IEnumerable<Currency>> Get(CurrencyFilterDTO filteringModel)
         {
             var query = FilterCurrencies(filteringModel);
+            
             query = query.Include(c => c.City);
+            if (filteringModel.WithBalance)
+            {
+                query = query.Include(c => c.CurrencyBalance);
+            }
             return await query.ToListAsync();
         }
 

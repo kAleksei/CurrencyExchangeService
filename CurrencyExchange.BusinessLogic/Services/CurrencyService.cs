@@ -21,7 +21,7 @@ namespace CurrencyExchange.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public virtual async Task<IEnumerable<CurrencyDTO>> Get(CurrencyFilterDTO filteringModel)
+        public virtual async Task<IEnumerable<CurrencyDTO>> Get(CurrencyFilterDTO filteringModel = null)
         {
             var currencies = await _unitOfWork.GetRepository<ICurrencyRepository>().Get(filteringModel);
             var result = _mapper.Map<IEnumerable<CurrencyDTO>>(currencies);
