@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyExchange.DataAccess
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyExchange.Domains", "CurrencyExchange.Domains\CurrencyExchange.Domains.csproj", "{8018257E-2717-4397-AF7C-1722616CA485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.BusinessLogic", "CurrencyExchange.BusinessLogic\CurrencyExchange.BusinessLogic.csproj", "{158F7037-9C50-4769-9643-C81A7023FA55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyExchange.BusinessLogic", "CurrencyExchange.BusinessLogic\CurrencyExchange.BusinessLogic.csproj", "{158F7037-9C50-4769-9643-C81A7023FA55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2B51D301-FDB7-40B6-8337-CB87807E1EAB}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastructure\buildspec.yml = Infrastructure\buildspec.yml
+		Infrastructure\Procfile = Infrastructure\Procfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
